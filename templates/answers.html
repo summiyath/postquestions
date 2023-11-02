@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h4 style="color:blue">hii {{request.user.username}},post your answer below</h4>
+<form  method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+{% if ans %}
+    {% for i in ans %}
+    <form method="POST" action="{% url 'like_answer' i.id %}">
+        {% csrf_token %}
+    <h1>Q:{{i.post.question}}</h1>
+         <h2>ans:{{i.content}}</h2>
+    <h3><button type="submit" style="color: BLUE;">LIKE</button></h3>
+    </form>
+
+<h5>{{i.user}}</h5>
+     <h5>{{i.date_posted}}</h5>
+{% endfor %}
+{% else %}
+<h4 style="color:green">hii {{request.user.username}} no answers yet.try giving answer</h4>
+{% endif %}
+
+
+
+</body>
+</html>

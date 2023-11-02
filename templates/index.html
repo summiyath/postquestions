@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+             									{% if user.is_authenticated %}
+
+
+     <a  href="{% url 'logout' %}" style="color:red" class="btn btn-success">LOGOUT</a>
+                                                 <a  href="{% url 'create_post' %}" style="color:green"  class="btn btn-success">ASK A QUESTION</a>
+            									{% else %}
+
+
+
+
+     <a  href="{% url 'login' %}" style="color:orange" class="btn btn-success">LOGIN</a>
+     <a  href="{% url 'register' %}" style="color:navyblue"  class="btn btn-success">REGISTER</a>
+                                                <a  href="{% url 'create_post' %}" style="color:green"  class="btn btn-success">ASK A QUESTION</a>
+
+
+									{% endif %}
+
+{% if obj %}
+{% for i in obj %}
+<h5>{{i.author}}</h5>
+     <h5>{{i.date_posted}}</h5>
+                                                <h1>Q:{{i.question}}</h1>
+<h2><a href="{% url 'post_answers' i.id %}">see answers</a></h2>
+{% endfor %}
+{% else %}
+
+<h4 style="color:green">hii {{request.user.username}},start asking questions</h4>
+{% endif %}
+
+
+</body>
+</html>
